@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Изменить пользователя</title>
 </head>
 <body>
-
+<h3 text="Изменение пользователя"></h3>
+<!--<h3 th:text="Изменение пользователя ${user.getName()}"></h3>-->
+<div>
+    <form th:method="PATCH" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}">
+        <div>
+            <label for="name">Имя</label>
+            <input type="text" id="name" th:field="*{name}" th:value="${user.getName()}">
+        </div>
+        <div>
+            <label for="age">Возраст</label>
+            <input name="age" type="text" id="age" th:value="${user.getAge()}">
+        </div>
+        <div>
+            <label for="skill">Мастерство</label>
+            <input name="skill" type="text" id="skill" th:value="${user.getSkill()}">
+        </div>
+        <input type="submit" value="Сохранить">
+    </form>
+</div>
 </body>
 </html>

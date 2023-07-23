@@ -1,25 +1,22 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Список пользователей</title>
 </head>
 <body>
 <div>
+    <h3>Все пользователи</h3>
     <ul>
         <li th:each="user : ${users}">
-            <span th:text="${user}"></span>
-            <!--            <a th:href="@{|/edit/${user.getId()}|}">Изменить</a>-->
-            <!--            <a th:href="@{|/delete/${user.getId()}|}">Удалить</a>-->
-            <a th:href="@{#}">Изменить</a>
-            <a th:href="@{#}">Удалить</a>
-            <form method="post" th:action="@{/delete/${user.getId()}}">
-                <input th:type="hidden" name="_method" value="patch">
+            <span th:text="${user}">Пользователь</span>
+            <a th:href="@{/edit/1}">Изменить</a>
+            <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
+                <input type="submit" value="Удалить">
             </form>
         </li>
     </ul>
-    <a th:href="@{#}">Добавить</a>
+    <a th:href="@{/add}">Добавить</a>
 </div>
 </body>
 </html>

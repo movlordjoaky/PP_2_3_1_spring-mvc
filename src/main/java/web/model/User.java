@@ -50,6 +50,6 @@ public class User {
 
     @Override
     public String toString() {
-        return name + ", " + age + " лет. Мастерство: " + skill;
+        return id + ". " + name + ", " + age + " лет. Мастерство: " + skill;
     }
 }

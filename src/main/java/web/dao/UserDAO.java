@@ -1,20 +1,23 @@
 package web.dao;
 
+import org.springframework.stereotype.Component;
 import web.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class UserDAO {
     private List<User> users;
+    private static int count;
 
     public UserDAO() {
         this.users = new ArrayList<>();
-        this.addUser(new User(1, "Миша", 20, 1.6));
-        this.addUser(new User(2, "Катя", 60, 2.5));
-        this.addUser(new User(3, "Коля", 90, -0.4));
-        this.addUser(new User(4, "Ахмед", 16, 1.3));
+        this.addUser(new User(0, "John", 20, 1.6));
+        this.addUser(new User(0, "Mary", 60, 2.5));
+        this.addUser(new User(0, "Anna", 90, -0.4));
+        this.addUser(new User(0, "Yog-Sothoth", 2000000000, 1300));
     }
 
     public List<User> getAllUsers() {
@@ -27,20 +30,15 @@ public class UserDAO {
     }
 
     public void addUser(User user) {
+        user.setId(++count);
         users.add(user);
     }
 
-    public void changeUser(User updatedUser) {
-        Optional<User> userOptional = users.stream()
-                .filter(user -> user.getId() == updatedUser.getId())
-                .findFirst();
-
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            int index = users.indexOf(user);
-
-            users.set(index, updatedUser);
-        }
+    public void changeUser(User newUser, int id) {
+        User oldUser = getUserById(id);
+        oldUser.setName(newUser.getName());
+        oldUser.setAge(newUser.getAge());
+        oldUser.setSkill(newUser.getSkill());
     }
 
     public void deleteUserById(int id) {
