@@ -3,32 +3,28 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import web.dao.UserDAO;
 import web.model.User;
+import web.services.UserService;
 
 @Controller
 public class UserController {
     private final UserDAO userDAO;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserDAO userDAO) {
+    public UserController(UserDAO userDAO, UserService userService) {
         this.userDAO = userDAO;
+        this.userService = userService;
     }
 
     // вывод всех пользователей
     @GetMapping(value = "/")
     public String printUsers(Model model) {
-        model.addAttribute("users", userDAO.getAllUsers());
+        model.addAttribute("users", userService.getAllUsers());
         return "index";
     }
-
-//    @GetMapping(value = "/{id}")
-//    public String printUser(Model model, @PathVariable int id) {
-//        model.addAttribute("user", userDAO.getUserById(id));
-//        return "adspofuhapdso";
-//    }
 
     // страница добавления пользователя
     @GetMapping(value = "/add")
@@ -46,7 +42,6 @@ public class UserController {
     @GetMapping(value = "/edit/{id}")
     public String changeUserForm(Model model, @PathVariable int id) {
         model.addAttribute("user", userDAO.getUserById(id));
-        System.out.println(userDAO.getUserById(id));
         return "change";
     }
 
