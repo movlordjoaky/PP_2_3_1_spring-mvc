@@ -7,9 +7,19 @@
 </head>
 <body>
 <div>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"></h1>
-    </th:block>
+    <ul>
+        <li th:each="user : ${users}">
+            <span th:text="${user}"></span>
+            <!--            <a th:href="@{|/edit/${user.getId()}|}">Изменить</a>-->
+            <!--            <a th:href="@{|/delete/${user.getId()}|}">Удалить</a>-->
+            <a th:href="@{#}">Изменить</a>
+            <a th:href="@{#}">Удалить</a>
+            <form method="post" th:action="@{/delete/${user.getId()}}">
+                <input th:type="hidden" name="_method" value="patch">
+            </form>
+        </li>
+    </ul>
+    <a th:href="@{#}">Добавить</a>
 </div>
 </body>
 </html>
