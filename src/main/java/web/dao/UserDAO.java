@@ -5,11 +5,10 @@ import web.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class UserDAO {
-    private List<User> users;
+    private final List<User> users;
     private static int count;
 
     public UserDAO() {
