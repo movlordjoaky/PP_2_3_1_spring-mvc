@@ -5,8 +5,7 @@
     <title>Изменить пользователя</title>
 </head>
 <body>
-<h3 text="Изменение пользователя"></h3>
-<!--<h3 th:text="Изменение пользователя ${user.getName()}"></h3>-->
+<h3 th:text="'Изменение пользователя ' + ${user.name}"></h3>
 <div>
     <form th:method="PATCH" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}">
         <div>

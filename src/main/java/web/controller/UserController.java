@@ -10,12 +10,10 @@ import web.services.UserService;
 
 @Controller
 public class UserController {
-    private final UserDAO userDAO;
     private final UserService userService;
 
     @Autowired
     public UserController(UserDAO userDAO, UserService userService) {
-        this.userDAO = userDAO;
         this.userService = userService;
     }
 
