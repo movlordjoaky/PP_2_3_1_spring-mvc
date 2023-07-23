@@ -26,15 +26,18 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    @Transactional
     public void addUser(User user) {
         userRepository.save(user);
     }
 
+    @Transactional
     public void changeUser(User newUser, int id) {
         newUser.setId(id);
         userRepository.save(newUser);
     }
 
+    @Transactional
     public void deleteUserById(int id) {
         userRepository.deleteById(id);
     }

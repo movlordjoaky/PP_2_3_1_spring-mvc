@@ -35,25 +35,25 @@ public class UserController {
     // команда на форме добавления пользователя
     @PostMapping()
     public String addUser(@ModelAttribute User user) {
-        userDAO.addUser(user);
+        userService.addUser(user);
         return "redirect:/";
     }
 
     @GetMapping(value = "/edit/{id}")
     public String changeUserForm(Model model, @PathVariable int id) {
-        model.addAttribute("user", userDAO.getUserById(id));
+        model.addAttribute("user", userService.getUserById(id));
         return "change";
     }
 
     @PatchMapping(value = "/{id}")
     public String changeUser(@ModelAttribute User user, @PathVariable int id) {
-        userDAO.changeUser(user, id);
+        userService.changeUser(user, id);
         return "redirect:/";
     }
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable int id) {
-        userDAO.deleteUserById(id);
+        userService.deleteUserById(id);
         return "redirect:/";
     }
 }
